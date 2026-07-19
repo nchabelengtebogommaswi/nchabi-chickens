@@ -34,6 +34,7 @@ void DatabaseConnection::open()
         return;
     }
 
+    filesystem::create_directories(databasePath.parent_path());
     int result = sqlite3_open( databasePath.c_str(), &database);
 
     if (result != SQLITE_OK)
@@ -47,12 +48,13 @@ void DatabaseConnection::open()
 
 void DatabaseConnection::close()
 {
-    if (database == nullptr)
-    {
-        return;
-    }
+    int rc = sqlite3_close(database);
 
-    sqlite3_close(database);
+    if(rc != SQLITE_OK)
+    {
+        throw runtime_error(
+            sqlite3_errmsg(database));
+    }
     database = nullptr;
 }
 
