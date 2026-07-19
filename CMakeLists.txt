@@ -46,6 +46,11 @@ add_library(
         src/database/Statement.cpp
 
         src/repository/ChickenRepository.cpp
+        include/controllers/ChickenController.h
+        include/services/ChickenService.h
+        src/services/ChickenService.cpp
+        src/controllers/ChickenController.cpp
+        src/controllers/ChickenController.cpp
 )
 
 target_include_directories(
@@ -70,6 +75,11 @@ add_executable(
         NchabiChickens
 
         src/main.cpp
+        include/controllers/ChickenController.h
+        include/services/ChickenService.h
+        src/services/ChickenService.cpp
+        src/controllers/ChickenController.cpp
+        src/controllers/ChickenController.cpp
 )
 
 target_link_libraries(

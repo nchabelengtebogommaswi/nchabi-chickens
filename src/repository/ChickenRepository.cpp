@@ -62,9 +62,54 @@ optional<Chicken> ChickenRepository::findById(int id)
     throw runtime_error("ChickenRepository::findById() not implemented.");
 }
 
-optional<Chicken> ChickenRepository::findByTagNumber(const string& tagNumber)
+optional<Chicken> ChickenRepository::findByTagNumber(
+    const string& tagNumber)
 {
-    throw runtime_error("ChickenRepository::findByTagNumber() not implemented.");
+    constexpr const char* sql = R"(
+        SELECT
+            Id,
+            TagNumber,
+            Breed,
+            Gender,
+            HatchDate,
+            PurchaseDate,
+            WeightKg,
+            Status,
+            Pen,
+            Notes,
+            CreatedAt,
+            UpdatedAt
+        FROM Chicken
+        WHERE TagNumber = ?;
+    )";
+
+    Statement statement(
+        databaseConnection.getHandle(),
+        sql);
+
+    statement.bindText(1, tagNumber);
+
+    if (!statement.step())
+    {
+        return nullopt;
+    }
+
+    Chicken chicken;
+
+    chicken.id = statement.columnInt(0);
+    chicken.tagNumber = statement.columnText(1);
+    chicken.breed = statement.columnText(2);
+    chicken.gender = statement.columnText(3);
+    chicken.hatchDate = statement.columnText(4);
+    chicken.purchaseDate = statement.columnText(5);
+    chicken.weightKg = statement.columnDouble(6);
+    chicken.status = statement.columnText(7);
+    chicken.pen = statement.columnText(8);
+    chicken.notes = statement.columnText(9);
+    chicken.createdAt = statement.columnText(10);
+    chicken.updatedAt = statement.columnText(11);
+
+    return chicken;
 }
 
 vector<Chicken> ChickenRepository::findAll()
