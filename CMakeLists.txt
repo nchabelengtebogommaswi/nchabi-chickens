@@ -24,6 +24,7 @@ find_library(
 add_executable(
         NchabiChickens
         src/main.cpp
+        src/database/DatabaseConnection.cpp
 )
 
 target_include_directories(
