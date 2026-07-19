@@ -25,6 +25,14 @@ add_executable(
         NchabiChickens
         src/main.cpp
         src/database/DatabaseConnection.cpp
+        include/models/SalesOrderItem.h
+        include/models/EggProduction.h
+        include/models/Chicken.h
+        include/models/Customer.h
+        include/models/Product.h
+        include/models/Inventory.h
+        include/models/SalesOrder.h
+        include/models/Delivery.h
 )
 
 target_include_directories(
