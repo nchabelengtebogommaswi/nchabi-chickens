@@ -23,7 +23,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 # Packages
 #
 find_package(PkgConfig REQUIRED)
-find_package(PostgreSQL REQUIRED)
+#find_package(PostgreSQL REQUIRED)
 find_package(nlohmann_json REQUIRED)
 find_package(Catch2 3 REQUIRED)
 
@@ -63,7 +63,7 @@ target_link_libraries(
         NchabiCore
         PUBLIC
         ${SQLITE3_LIBRARIES}
-        ${PostgreSQL_LIBRARIES}
+#        ${PostgreSQL_LIBRARIES}
         nlohmann_json::nlohmann_json
 )
 
